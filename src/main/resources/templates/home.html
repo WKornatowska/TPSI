@@ -1,0 +1,23 @@
+<div>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Tytuł</th>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Rocznik</th>
+            <th>Cena</th>
+        </tr>
+        <tr th:each="offer : ${offers}">
+            <td><a th:href="|/offer/${offer.id}|">Pokaż</a></td>
+            <td th:text="${offer.title}"></td>
+            <td th:text="${offer.model.manufacturer.name}"></td>
+            <td th:text="${offer.model.name}"></td>
+            <td th:text="${offer.year}"></td>
+            <td class="text-right">
+                <span th:text="${#numbers.formatDecimal(offer.price, 0, 'WHITESPACE', 0,'COMMA')}"></span>
+                zł
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,44 @@
+<!-- <form action="/offerslist" method="POST" class="form-horizontal" th:object="${offerFilter}">
+    Rok <input type="text" class="form-control" th:field="*{minYear}">
+    <input type="submit" value="Zapisz" class="form-control btn btn-primary" />
+</form> -->
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Tytuł</th>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Rocznik</th>
+            <th>Cena</th>
+            <th>Dodane: </th>
+        </tr>
+    </thead>
+    <tr th:each="offer : ${offers}">
+        <td><a th:href="|/offer/${offer.id}|">Pokaż</a></td>
+        <td th:text="${offer.title}"></td>
+        <td th:text="${offer.model.manufacturer.name}"></td>
+        <td th:text="${offer.model.name}"></td>
+        <td th:text="${offer.year}"></td>
+        <td class="text-right">
+            <span th:text="${#numbers.formatDecimal(offer.price, 0, 'WHITESPACE', 0,'COMMA')}"></span>
+            zł
+        </td>
+        <td th:text="${offer.created}"></td>
+    </tr>
+    </table>
+    <!-- Strony -->
+    <nav aria-label="...">
+        <ul class="pagination">
+            
+            <li class="page-item" th:classappend="${page_num == 1} ? 'disabled' : ''">
+                <a class="page-link" th:href="${page_num == 1} ? '1' : ${page_num-1}">Previous</a>
+            </li>
+            <th:block th:each="i : ${#numbers.sequence( 1, pages)}">
+                <li class="page-item" th:classappend="${page_num == i} ? 'active' : ''"><a class="page-link" th:href="${i}" th:text="${i}"></a></li>
+            </th:block>
+            <li class="page-item" th:classappend="${page_num == pages} ? 'disabled' : ''">
+                <a class="page-link" th:href="${page_num == pages} ? ${pages} : ${page_num+1}">Next</a>
+            </li>
+        </ul>
+    </nav>

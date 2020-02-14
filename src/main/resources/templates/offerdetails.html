@@ -1,0 +1,41 @@
+<h2>
+    Cena:
+    <span class="text-primary" th:text="${#numbers.formatDecimal(offer.price, 0, 'WHITESPACE', 0,'COMMA')}"></span> zł
+</h2>
+
+<table th:object="${offer}" class="table">
+    <tr>
+        <th>Marka:</th>
+        <td th:text="*{model.manufacturer.name}"></td>
+        <th>Nadwozie:</th>
+        <td th:text="|*{bodyStyle.name} *{doors}D|"></td>
+    </tr>
+    <tr>
+        <th>Model:</th>
+        <td th:text="*{model.name}"></td>
+        <th>Kolor:</th>
+        <td th:text="*{colour}"></td>
+    </tr>
+    <tr>
+        <th>Rok Produkcji:</th>
+        <td th:text="*{year}">
+        </td>
+        <th>Pojemność Silnika:</th>
+        <td th:text="*{engineSize}">
+        </td>
+    </tr>
+    <tr>
+        <th>Moc Silnika:</th>
+        <td th:text="*{enginePower}">
+        </td>
+        <th>Paliwo:</th>
+        <td th:text="*{fuelType.name}">
+        </td>
+    </tr>
+</table>
+<div th:text="${offer.description}" class="well">
+</div>
+<div>
+    <a th:href="|/deleteoffer/${offer.id}|" class="btn btn-danger">Usuń ogłoszenie</a>
+    <a th:href="|/editoffer/${offer.id}|" class="btn btn-primary">Edytuj ogłoszenie</a>
+</div>
